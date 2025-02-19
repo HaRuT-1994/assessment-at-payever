@@ -1,0 +1,35 @@
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f1f1f1;
+}
+
+.side {
+  flex: 20%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.main {
+  flex: 70%;
+  padding: 20px;
+
+  .appointments {
+    margin: 10px;
+    padding: 10px;
+    background-color: #d9d9d93b;;
+    display: grid;
+
+    .time-block {
+      padding: 5px;
+      border-bottom: 1px solid #bcbcbcdf;
+    }
+
+    .appointment {
+      display: flex;
+      justify-content: space-between;
+      background-color: rgb(60, 214, 249);
+    }
+  }
+}

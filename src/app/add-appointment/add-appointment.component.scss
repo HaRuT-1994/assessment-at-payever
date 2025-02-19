@@ -1,0 +1,17 @@
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  .mat-icon {
+    margin: 0;
+  }
+}
+
+.form {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}

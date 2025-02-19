@@ -1,0 +1,36 @@
+<div mat-dialog-title>
+  <button mat-button class="close" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <h3>Add Title</h3>
+</div>
+
+<mat-dialog-content align="center">
+  <div class="form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="title" name="appointmentTitle" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Meeting date</mat-label>
+      <input matInput [matDatepicker]="datepicker" [(ngModel)]="date">
+      <mat-datepicker #datepicker/>
+      <mat-datepicker-toggle [for]="datepicker" matSuffix/>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Meeting time</mat-label>
+      <input matInput
+        [matTimepicker]="timepicker"
+        [(ngModel)]="date"
+        [ngModelOptions]="{updateOn: 'blur'}">
+      <mat-timepicker #timepicker/>
+      <mat-timepicker-toggle [for]="timepicker" matSuffix/>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="button" (click)="addAppointment()">Add Appointment</button>
+  </div>
+  
+</mat-dialog-content>

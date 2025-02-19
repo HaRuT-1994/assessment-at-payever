@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="side">
+    <button
+      mat-raised-button
+      matSuffix
+      type="button"
+      color="primary"
+      [attr.aria-label]="'Create appointment'"
+      (click)="showAddAppointment()"
+    >
+      Create
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+  </div>
+  <div class="main">
+    <div class="header">
+      <button mat-raised-button color="primary" type="button" (click)="today()">Today</button>
+
+      <button mat-raised-button color="primary" type="button" (click)="backDay()"><mat-icon>arrow_back</mat-icon></button>
+      <button mat-raised-button color="primary" type="button" (click)="forwardDay()"><mat-icon>arrow_forward</mat-icon></button>
+
+      {{selectedDate() | date: 'longDate' }}
+    </div>
+    <div class="appointments" cdkDropList (cdkDropListDropped)="drop($event)">
+      @for (date of appointmentDates; track date; let idx = $index) {
+        <div class="time-block" [ngClass]="{'appointment': date?.appointment?.title}" cdkDrag [cdkDragData]="date.appointment">
+          @if(date?.appointment?.title) {
+            <span>
+              {{date.time}}
+              <span style="margin-left: 100px;">{{date?.appointment?.title}}</span>
+            </span>
+
+            <button mat-button (click)="removeAppointment(date?.appointment)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          } @else {
+            {{date}}
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
