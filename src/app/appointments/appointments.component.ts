@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { AddAppointmentComponent } from '../add-appointment/add-appointment.component';
 import { IAppointment } from '../appointment.model';
 import {CdkDragDrop, CdkDropList, CdkDrag} from '@angular/cdk/drag-drop';
-import { V } from '@angular/cdk/keycodes';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class AppointmentsComponent {
   selectedDate = model<Date>(new Date());
 
   initialAppointmentDates: any[] = [ '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12AM', '1PM', '2PM','3PM','4PM', '5PM','6PM', '7PM', '8PM', '9PM', '10PM', '11PM'];
-  appointmentDates: any[] = [ '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12AM', '1PM', '2PM','3PM','4PM', '5PM','6PM', '7PM', '8PM', '9PM', '10PM', '11PM'];
+  appointmentDates: Array<string | {time: string, appointment: IAppointment}>  = [ '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12AM', '1PM', '2PM','3PM','4PM', '5PM','6PM', '7PM', '8PM', '9PM', '10PM', '11PM'];
   private selectedDayAppoinetMents: IAppointment[] = [];
 
   constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
@@ -62,14 +61,14 @@ export class AppointmentsComponent {
   private setAppoinetMentOnView(data: IAppointment[]) {
     this.appointmentDates = [...this.initialAppointmentDates];
 
-    this.appointmentDates.forEach((i, idx) => {
+    this.appointmentDates.forEach((i: any, idx) => {
       data.forEach(appointment => {
         let hours = new Date(appointment.date).getHours();
         const amPm = hours >= 12 ? "PM" : "AM";
         hours = hours % 12 || 12;
         const meridenHour = `${hours}${amPm}`;
   
-        if(i === meridenHour || i.time === meridenHour) {
+        if(i === meridenHour || i?.time === meridenHour) {
           this.appointmentDates[idx] = { time: i?.time || i, appointment };
         }
       })
